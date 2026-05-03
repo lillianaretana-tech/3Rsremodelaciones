@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3Rs Remodelaciones – Construcción y Remodelación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0d0d0d;
+      --dark:    #1a1a1a;
+      --mid:     #2e2e2e;
+      --steel:   #4a4a4a;
+      --silver:  #9a9a9a;
+      --light:   #f2f2f0;
+      --white:   #ffffff;
+      --green:   #2e7d52;
+      --green2:  #3aa068;
+      --green-light: #e6f4ed;
+      --shadow:  0 4px 24px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.14);
+      --radius:  14px;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ─────────────────────────────────── */
+    .hero {
+      background: var(--black);
+      color: var(--white);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      padding: 56px 24px 64px;
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--green);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 14vw, 96px);
+      line-height: 0.95;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+    .hero h1 span { color: var(--green2); }
+    .hero-sub {
+      font-size: clamp(15px, 4vw, 19px);
+      color: #c8c8c8;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+      line-height: 1.55;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--white);
+      font-size: 17px;
+      font-weight: 700;
+      padding: 18px 36px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 20px rgba(46,125,82,0.45);
+    }
+    .hero-cta:hover { background: var(--green2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(46,125,82,0.55); }
+    .hero-cta svg { width: 22px; height: 22px; fill: currentColor; }
+
+    /* grid texture overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(46,125,82,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,125,82,0.07) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 1;
+    }
+    /* gradient fade bottom */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(transparent, var(--white));
+      z-index: 3;
+    }
+
+    /* ── SECTION BASE ─────────────────────────── */
+    section { padding: 72px 20px; }
+    .section-inner { max-width: 860px; margin: 0 auto; }
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 8vw, 54px);
+      line-height: 1;
+      color: var(--black);
+      margin-bottom: 40px;
+    }
+
+    /* ── SERVICIOS ────────────────────────────── */
+    #servicios { background: var(--light); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: default;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .service-icon {
+      font-size: 34px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .service-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+    }
+
+    /* ── CÓMO TRABAJAMOS ─────────────────────── */
+    #como { background: var(--white); }
+    .steps-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 20px;
+    }
+    .step-card {
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      position: relative;
+    }
+    .step-number {
+      font-family: var(--font-display);
+      font-size: 60px;
+      line-height: 1;
+      color: var(--green);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .step-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .step-card p {
+      font-size: 14px;
+      color: var(--steel);
+      line-height: 1.5;
+    }
+
+    /* ── CTA CENTRAL ──────────────────────────── */
+    .cta-band {
+      background: var(--black);
+      color: var(--white);
+      padding: 64px 20px;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 7vw, 52px);
+      margin-bottom: 12px;
+    }
+    .cta-band p {
+      color: #c0c0c0;
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 700;
+      padding: 20px 42px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 24px rgba(46,125,82,0.50);
+    }
+    .btn-wa:hover { background: var(--green2); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(46,125,82,0.60); }
+    .btn-wa svg { width: 24px; height: 24px; fill: currentColor; flex-shrink: 0; }
+
+    /* ── CONFIANZA ────────────────────────────── */
+    #confianza { background: var(--light); }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .trust-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.25s;
+    }
+    .trust-card:hover { transform: translateY(-3px); }
+    .trust-icon { font-size: 30px; }
+    .trust-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+    }
+    .trust-card p {
+      font-size: 13.5px;
+      color: var(--steel);
+      line-height: 1.5;
+    }
+
+
+    .hero-note {
+      display: inline-block;
+      color: var(--green-light);
+      background: rgba(46,125,82,0.18);
+      border: 1px solid rgba(58,160,104,0.35);
+      padding: 9px 16px;
+      border-radius: 100px;
+      margin: -16px auto 28px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .project-pill {
+      background: var(--white);
+      border-left: 4px solid var(--green);
+      border-radius: var(--radius);
+      padding: 18px 18px;
+      box-shadow: var(--shadow);
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    /* ── GALERÍA ──────────────────────────────── */
+    #galeria { background: var(--white); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .gallery-item {
+      background: var(--light);
+      border-radius: var(--radius);
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .gallery-item:hover { transform: scale(1.025); box-shadow: var(--shadow-lg); }
+    .gallery-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--silver);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .gallery-placeholder span { font-size: 36px; }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-caption {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      background: rgba(13,13,13,0.78);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 9px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .gallery-caption span {
+      display: block;
+      color: var(--green-light);
+      font-size: 10px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    /* Different tinted backgrounds for visual variety */
+    .gallery-item:nth-child(1) { background: #e8f0eb; }
+    .gallery-item:nth-child(2) { background: #e8ecf0; }
+    .gallery-item:nth-child(3) { background: #f0ede8; }
+    .gallery-item:nth-child(4) { background: #e8f0eb; }
+    .gallery-item:nth-child(5) { background: #f0ede8; }
+    .gallery-item:nth-child(6) { background: #e8ecf0; }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 52px 20px 40px;
+      text-align: center;
+    }
+    footer .logo-text {
+      font-family: var(--font-display);
+      font-size: 40px;
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    footer .logo-text span { color: var(--green2); }
+    footer .tagline {
+      font-size: 15px;
+      color: #aaa;
+      margin-bottom: 28px;
+    }
+    footer .footer-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-bottom: 28px;
+    }
+    footer .footer-wa:hover { background: var(--green2); }
+    footer .footer-wa svg { width: 20px; height: 20px; fill: currentColor; }
+    footer .copy {
+      font-size: 12px;
+      color: #555;
+      margin-top: 24px;
+    }
+    .footer-divider {
+      width: 40px;
+      height: 3px;
+      background: var(--green);
+      border-radius: 2px;
+      margin: 0 auto 28px;
+    }
+
+    /* ── FLOATING BUTTON ──────────────────────── */
+    .fab-wa {
+      position: fixed;
+      bottom: 28px;
+      right: 22px;
+      z-index: 9999;
+      background: #25D366;
+      color: var(--white);
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.55);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse 2.8s infinite;
+    }
+    .fab-wa:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37,211,102,0.7); animation: none; }
+    .fab-wa svg { width: 32px; height: 32px; fill: currentColor; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.55); }
+      50%        { box-shadow: 0 4px 36px rgba(37,211,102,0.85); }
+    }
+
+    /* ── NAV ──────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: rgba(13,13,13,0.96);
+      backdrop-filter: blur(8px);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 26px;
+      color: var(--white);
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--green2); }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-links a {
+      color: #ccc;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green2); }
+    .nav-wa {
+      background: var(--green) !important;
+      color: var(--white) !important;
+      padding: 9px 18px;
+      border-radius: 100px;
+      font-size: 13px !important;
+      transition: background 0.2s !important;
+    }
+    .nav-wa:hover { background: var(--green2) !important; }
+
+    @media (max-width: 560px) {
+      .nav-links .hide-mobile { display: none; }
+    }
+
+    /* ── ENTER ANIMATIONS ─────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">3Rs <span>Remo</span></a>
+  <div class="nav-links">
+    <a href="#servicios" class="hide-mobile">Servicios</a>
+    <a href="#confianza" class="hide-mobile">Nosotros</a>
+    <a href="https://wa.me/50662145489?text=Hola%2C%20quiero%20cotizar%20un%20trabajo.%20Te%20env%C3%ADo%20fotos." target="_blank" class="nav-wa">WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">San José, Costa Rica</span>
+    <h1>3Rs <span>Remo&shy;dela&shy;ciones</span></h1>
+    <p class="hero-sub">Soluciones completas en construcción, remodelación y mantenimiento del hogar</p>
+    <p class="hero-note">Cotizaciones rápidas por WhatsApp · Envíanos fotos y te orientamos</p>
+    <a href="https://wa.me/50662145489?text=Hola%2C%20quiero%20cotizar%20un%20trabajo.%20Te%20env%C3%ADo%20fotos." target="_blank" class="hero-cta">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.563 4.14 1.541 5.878L0 24l6.334-1.518A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.003-1.372l-.36-.214-3.727.893.934-3.617-.234-.373A9.786 9.786 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.418-4.4 9.818-9.818 9.818z"/></svg>
+      Solicitar cotización por WhatsApp
+    </a>
+  </div>
+</header>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section-inner">
+    <span class="section-label">Lo que hacemos</span>
+    <h2 class="section-title fade-up">Nuestros Servicios</h2>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <span class="service-icon">🏠</span>
+        <h3>Remodelaciones completas</h3>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🔧</span>
+        <h3>Reparación de techos</h3>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🪟</span>
+        <h3>Instalación de cerámica y pisos</h3>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🚿</span>
+        <h3>Remodelación de baños</h3>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">⚡</span>
+        <h3>Electricidad básica</h3>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">💧</span>
+        <h3>Fontanería</h3>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🎨</span>
+        <h3>Pintura interior y exterior</h3>
+      </div>
+      <div class="service-card fade-up">
+        <span class="service-icon">🏗️</span>
+        <h3>Construcción de gradas y estructuras</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO TRABAJAMOS -->
+<section id="como">
+  <div class="section-inner">
+    <span class="section-label">El proceso</span>
+    <h2 class="section-title fade-up">Trabajamos Así</h2>
+    <div class="steps-list">
+      <div class="step-card fade-up">
+        <span class="step-number">01</span>
+        <h3>Envíanos fotos</h3>
+        <p>Compártenos fotos del área por WhatsApp para ver el estado actual.</p>
+      </div>
+      <div class="step-card fade-up">
+        <span class="step-number">02</span>
+        <h3>Evaluamos</h3>
+        <p>Analizamos el trabajo necesario con experiencia y criterio.</p>
+      </div>
+      <div class="step-card fade-up">
+        <span class="step-number">03</span>
+        <h3>Cotización clara</h3>
+        <p>Recibes un precio definido, sin sorpresas ni cobros ocultos.</p>
+      </div>
+      <div class="step-card fade-up">
+        <span class="step-number">04</span>
+        <h3>Lo ejecutamos</h3>
+        <p>Realizamos el trabajo con calidad, orden y puntualidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>¿Listo para empezar?</h2>
+  <p>Un mensaje es suficiente para comenzar tu proyecto.</p>
+  <a href="https://wa.me/50662145489?text=Hola%2C%20quiero%20cotizar%20un%20trabajo.%20Te%20env%C3%ADo%20fotos." target="_blank" class="btn-wa">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.563 4.14 1.541 5.878L0 24l6.334-1.518A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.003-1.372l-.36-.214-3.727.893.934-3.617-.234-.373A9.786 9.786 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.418-4.4 9.818-9.818 9.818z"/></svg>
+    Solicitar cotización por WhatsApp
+  </a>
+</div>
+
+<!-- CONFIANZA -->
+<section id="confianza">
+  <div class="section-inner">
+    <span class="section-label">Por qué elegirnos</span>
+    <h2 class="section-title fade-up">En Qué Puedes Confiar</h2>
+    <div class="trust-grid">
+      <div class="trust-card fade-up">
+        <span class="trust-icon">🤝</span>
+        <h3>Trabajo responsable</h3>
+        <p>Cumplimos con lo acordado y respetamos tu hogar y tu tiempo.</p>
+      </div>
+      <div class="trust-card fade-up">
+        <span class="trust-icon">🏆</span>
+        <h3>Experiencia comprobada</h3>
+        <p>Años de trabajo en remodelaciones avalan nuestros resultados.</p>
+      </div>
+      <div class="trust-card fade-up">
+        <span class="trust-icon">👤</span>
+        <h3>Atención personalizada</h3>
+        <p>Te acompañamos en cada etapa del proyecto, sin intermediarios.</p>
+      </div>
+      <div class="trust-card fade-up">
+        <span class="trust-icon">📋</span>
+        <h3>Cotizaciones claras</h3>
+        <p>Sin letra pequeña. El precio que acordamos es el que pagas.</p>
+      </div>
+      <div class="trust-card fade-up">
+        <span class="trust-icon">💪</span>
+        <h3>Compromiso total</h3>
+        <p>Tu satisfacción es el éxito de nuestro trabajo. Sin excepciones.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TIPOS DE PROYECTOS -->
+<section id="proyectos" style="background: var(--light);">
+  <div class="section-inner">
+    <span class="section-label">Proyectos que realizamos</span>
+    <h2 class="section-title fade-up">Soluciones para tu casa</h2>
+    <div class="project-list">
+      <div class="project-pill fade-up">✔ Remodelaciones completas de viviendas</div>
+      <div class="project-pill fade-up">✔ Baños desde cero o remodelación total</div>
+      <div class="project-pill fade-up">✔ Pisos, cerámica y acabados</div>
+      <div class="project-pill fade-up">✔ Gradas, estructuras y mejoras de acceso</div>
+      <div class="project-pill fade-up">✔ Pintura interior y exterior</div>
+      <div class="project-pill fade-up">✔ Electricidad, fontanería y mantenimiento</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="section-inner">
+    <span class="section-label">Nuestros trabajos</span>
+    <h2 class="section-title fade-up">Proyectos Realizados</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item fade-up">
+        <img src="imagenes/despues-ceramica.jpeg" alt="Piso en cerámica terminado">
+        <div class="gallery-caption"><span>Resultado final</span>Piso en cerámica terminado</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/proceso-ceramica.jpeg" alt="Instalación de cerámica en proceso">
+        <div class="gallery-caption"><span>En proceso</span>Instalación de cerámica en proceso</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/despues-gradas.jpg" alt="Gradas terminadas con enchape">
+        <div class="gallery-caption"><span>Resultado final</span>Gradas terminadas con enchape</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/proceso-gradas.jpg" alt="Construcción de gradas en proceso">
+        <div class="gallery-caption"><span>En proceso</span>Construcción de gradas en proceso</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/despues-bano-jacuzzi.jpeg" alt="Remodelación de baño con jacuzzi">
+        <div class="gallery-caption"><span>Resultado final</span>Remodelación de baño con jacuzzi</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/antes-bano-jacuzzi.jpeg" alt="Baño antes de remodelación">
+        <div class="gallery-caption"><span>Antes</span>Baño antes de remodelación</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/despues-casa.jpeg" alt="Fachada terminada">
+        <div class="gallery-caption"><span>Resultado final</span>Fachada terminada</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/antes-casa.jpeg" alt="Fachada en proceso de construcción">
+        <div class="gallery-caption"><span>Antes</span>Fachada en proceso de construcción</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/despues-griferia.jpg" alt="Instalación de grifería terminada">
+        <div class="gallery-caption"><span>Resultado final</span>Instalación de grifería terminada</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/proceso-griferia.jpg" alt="Instalación de tuberías y grifería">
+        <div class="gallery-caption"><span>En proceso</span>Instalación de tuberías y grifería</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/proceso-cielorraso.jpg" alt="Instalación de cielorraso">
+        <div class="gallery-caption"><span>En proceso</span>Instalación de cielorraso</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="imagenes/despues-bano.jpg" alt="Baño remodelado terminado">
+        <div class="gallery-caption"><span>Resultado final</span>Baño remodelado terminado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-text">3Rs <span>Remodelaciones</span></div>
+  <p class="tagline">Tu proyecto en buenas manos</p>
+  <div class="footer-divider"></div>
+  <a href="https://wa.me/50662145489?text=Hola%2C%20quiero%20cotizar%20un%20trabajo.%20Te%20env%C3%ADo%20fotos." target="_blank" class="footer-wa">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.563 4.14 1.541 5.878L0 24l6.334-1.518A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.003-1.372l-.36-.214-3.727.893.934-3.617-.234-.373A9.786 9.786 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.418-4.4 9.818-9.818 9.818z"/></svg>
+    Escríbenos por WhatsApp
+  </a>
+  <p class="copy">© 2026 3Rs Remodelaciones · San José, Costa Rica</p>
+</footer>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/50662145489?text=Hola%2C%20quiero%20cotizar%20un%20trabajo.%20Te%20env%C3%ADo%20fotos." target="_blank" class="fab-wa" title="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.563 4.14 1.541 5.878L0 24l6.334-1.518A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.795 9.795 0 01-5.003-1.372l-.36-.214-3.727.893.934-3.617-.234-.373A9.786 9.786 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.418-4.4 9.818-9.818 9.818z"/></svg>
+</a>
+
+<script>
+  // Fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
